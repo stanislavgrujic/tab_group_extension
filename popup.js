@@ -12,7 +12,7 @@ storeTab.onclick = function(element) {
             chrome.storage.local.set(items);
         })
         chrome.storage.local.get(null, function(all) {
-            alert(JSON.stringify(all));
+            console.log(JSON.stringify(all));
         })
     })
 };
