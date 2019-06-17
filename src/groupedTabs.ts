@@ -1,17 +1,19 @@
+import { Item } from './Item'
+
 
 chrome.storage.local.get(["defaultGroup"], function(items) {
   var group = document.getElementById('group');
   var itemsInGroup = items["defaultGroup"];
   
   for (var i = 0; i < itemsInGroup.length; i++) {
-    var item = itemsInGroup[i];
+    let item: Item = itemsInGroup[i];
     var groupItem = createGroupItem(item, i);
     group.appendChild(groupItem);
   }
 
 }) 
 
-function createGroupItem(item, i) {
+function createGroupItem(item : Item, i) {
   var groupItem = document.createElement("div");
   groupItem.className = 'groupItem';
   var link = createItemLInk(item, i);
@@ -19,11 +21,11 @@ function createGroupItem(item, i) {
   return groupItem;
 }
 
-function createItemLInk(item, i) {
+function createItemLInk(item : Item, i) {
   var link = document.createElement('a');
-  var linkText = document.createTextNode(item);
+  var linkText = document.createTextNode(item.url);
   link.appendChild(linkText);
-  link.href = item;
+  link.href = item.url;
   link.title = 'Item ' + i;
   return link;
 }
