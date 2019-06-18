@@ -4,7 +4,7 @@ module.exports = {
   entry: {
     popup: path.join(__dirname, "src/popup.ts"),
     groupedTabs: path.join(__dirname, "src/groupedTabs.ts"),
-    test: path.join(__dirname, "src/Test.ts")
+    test: path.join(__dirname, "src/Item.ts")
   },
   output: {
     path: path.join(__dirname, "dist/js"),

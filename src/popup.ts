@@ -1,19 +1,21 @@
 import { Item } from "./Item";
+import { Group } from "./Group";
 
-let storeTab = document.getElementById('storeTab');
+let saveTab = document.getElementById('saveTab');
 
-storeTab.onclick = function(element) {
+saveTab.onclick = function(element) {
   chrome.tabs.query({'active': true}, function(tabs) {
       let url = tabs[0].url;
-      var groupName = "defaultGroup"
+      var selectedGroup = document.getElementById('groups') as HTMLSelectElement;
+      var group = selectedGroup.options[selectedGroup.selectedIndex].value;
 
-      chrome.storage.local.get(["defaultGroup"], function(items) {
+      chrome.storage.local.get([group], function(items) {
           let item : Item = {
             url: url,
             title: ''
           };
 
-          items["defaultGroup"].push(item);
+          items[group].push(item);
 
           chrome.storage.local.set(items);
       })
@@ -22,3 +24,9 @@ storeTab.onclick = function(element) {
       })
   })
 };
+
+let groups = document.getElementById('groups');
+
+chrome.storage.sync.get('groups', function(groups) {
+  
+})
