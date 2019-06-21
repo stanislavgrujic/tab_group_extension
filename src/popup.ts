@@ -7,17 +7,18 @@ saveTab.onclick = function(element) {
   chrome.tabs.query({'active': true}, function(tabs) {
       let url = tabs[0].url;
       var selectedGroup = document.getElementById('groups') as HTMLSelectElement;
-      var group = selectedGroup.options[selectedGroup.selectedIndex].value;
+      var groupValue = selectedGroup.options[selectedGroup.selectedIndex].value;
 
-      chrome.storage.local.get([group], function(items) {
+      chrome.storage.local.get([groupValue], function(group: Group) {
           let item : Item = {
             url: url,
             title: ''
           };
 
-          items[group].push(item);
+          group[groupValue].items.push(item);
 
-          chrome.storage.local.set(items);
+          alert(JSON.stringify(group));
+          chrome.storage.local.set(group);
       })
       chrome.storage.local.get(null, function(all) {
           console.log(JSON.stringify(all));
@@ -27,6 +28,6 @@ saveTab.onclick = function(element) {
 
 let groups = document.getElementById('groups');
 
-chrome.storage.sync.get('groups', function(groups) {
+chrome.storage.local.get('groups', function(groups) {
   
 })

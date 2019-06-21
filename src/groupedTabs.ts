@@ -1,27 +1,30 @@
 import { Item } from './Item'
+import { Group } from './Group';
 
+var key = "defaultGroup";
+chrome.storage.local.get([key], function(result) {
+  var groupElement = document.getElementById('group');
+  var group = result[key] as Group;
 
-chrome.storage.local.get(["defaultGroup"], function (items: Item[]) {
-  var group = document.getElementById('group');
-  var itemsInGroup = items["defaultGroup"];
+  var itemsInGroup = group.items;
 
   for (var i = 0; i < itemsInGroup.length; i++) {
     let item: Item = itemsInGroup[i];
     var groupItem = createGroupItem(item, i);
-    group.appendChild(groupItem);
+    groupElement.appendChild(groupItem);
   }
 
 })
 
 function createGroupItem(item: Item, i: number): HTMLDivElement {
-  var groupItem = document.createElement("div");
+  var groupItem = document.createElement('div');
   groupItem.className = 'groupItem';
   var link = createItemLInk(item, i);
   groupItem.appendChild(link);
   return groupItem;
 }
 
-function createItemLInk(item: Item, i: number) {
+function createItemLInk(item: Item, i: number): HTMLAnchorElement {
   var link = document.createElement('a');
   var linkText = document.createTextNode(item.url);
   link.appendChild(linkText);
