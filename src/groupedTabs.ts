@@ -3,18 +3,32 @@ import { Group } from './Group';
 
 var key = "defaultGroup";
 chrome.storage.local.get([key], function(result) {
-  var groupElement = document.getElementById('group');
+  var groupsElement = document.getElementById('groups');
   var group = result[key] as Group;
 
   var itemsInGroup = group.items;
 
-  for (var i = 0; i < itemsInGroup.length; i++) {
-    let item: Item = itemsInGroup[i];
-    var groupItem = createGroupItem(item, i);
-    groupElement.appendChild(groupItem);
-  }
+  var groupElement = createGroup(group);
+  groupsElement.appendChild(groupElement);
 
 })
+
+function createGroup(group: Group): HTMLDivElement {
+  var groupElement = document.createElement('div');
+  groupElement.className = 'group';
+
+  var title = document.createElement('div');
+  title.innerText = group.displayName;
+  groupElement.appendChild(title);
+
+  for (var i = 0; i < group.items.length; i++) {
+    let item: Item = group.items[i];
+    var groupItemElement = createGroupItem(item, 1);
+    groupElement.appendChild(groupItemElement);
+  }
+
+  return groupElement;
+}
 
 function createGroupItem(item: Item, i: number): HTMLDivElement {
   var groupItem = document.createElement('div');
