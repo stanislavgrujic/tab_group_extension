@@ -1,4 +1,5 @@
 export interface Item {
   url: string,
-  title: string 
+  title: string,
+  screenshotUrl: string 
 }

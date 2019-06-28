@@ -1,5 +1,6 @@
 import { Item } from './Item'
 import { Group } from './Group';
+import { IframeHTMLAttributes } from 'react';
 
 chrome.storage.local.get(null, function(result) {
 
@@ -33,16 +34,26 @@ function createGroup(group: Group): HTMLDivElement {
 function createGroupItem(item: Item, i: number): HTMLDivElement {
   var groupItem = document.createElement('div');
   groupItem.className = 'groupItem';
-  var link = createItemLInk(item, i);
+  var link = createItemLInk(item);
+  
+  var image = createItemScreenImage(item);
+  link.appendChild(image);
+
   groupItem.appendChild(link);
   return groupItem;
 }
 
-function createItemLInk(item: Item, i: number): HTMLAnchorElement {
+function createItemLInk(item: Item): HTMLAnchorElement {
   var link = document.createElement('a');
-  var linkText = document.createTextNode(item.url);
-  link.appendChild(linkText);
   link.href = item.url;
-  link.title = 'Item ' + i;
+  link.title = item.title;
   return link;
+}
+
+function createItemScreenImage(item: Item): HTMLImageElement {
+  var image = document.createElement('img');
+  image.src = item.screenshotUrl;
+  image.className = 'screenshot';
+  image.title = item.url;
+  return image;
 }

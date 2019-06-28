@@ -1,0 +1,14 @@
+div.group {
+  clear: both;
+  display: inline;
+  float: right;
+}
+img.screenshot {
+  border: 1px;
+  border-style: solid;
+  float: left;
+  height: 25%;
+  width: 25%;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
