@@ -1,15 +1,15 @@
 import { Item } from './Item'
 import { Group } from './Group';
 
-var key = "defaultGroup";
-chrome.storage.local.get([key], function(result) {
+chrome.storage.local.get(null, function(result) {
+
   var groupsElement = document.getElementById('groups');
-  var group = result[key] as Group;
 
-  var itemsInGroup = group.items;
-
-  var groupElement = createGroup(group);
-  groupsElement.appendChild(groupElement);
+  for (var key in result) {
+    var group = result[key] as Group;
+    var groupElement = createGroup(group);
+    groupsElement.appendChild(groupElement);
+  }
 
 })
 
