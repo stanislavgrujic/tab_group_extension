@@ -9,7 +9,6 @@ chrome.runtime.onInstalled.addListener(function() {
     });
 
     let anotherGroup: Group = new Group('anotherGroup', 'Another Group');
-    var anotherGroupName = anotherGroup.name;
     chrome.storage.local.set({'anotherGroup': anotherGroup}, function() {
       console.log(JSON.stringify(anotherGroup));
     });

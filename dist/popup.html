@@ -10,11 +10,17 @@
       </style>
     </head>
     <body>
-      <button id="saveTab">Save Tab</button>
-      <select id="groups">
-        <option value="defaultGroup"> Default group</option>
-        <option value='anotherGroup'>Another Group</option>
-      </select>
+      <div id='createGroup' class="createGroup">
+        <input type="text" id="createGroupInput">
+        <button id="createGroup">Create Group</button>
+      </div>
+      <div id='saveTab' class="saveTab">
+        <select id="groups">
+          <option value="defaultGroup"> Default group</option>
+          <option value='anotherGroup'>Another Group</option>
+        </select>
+        <button id="saveTab">Save Tab</button>
+      </div>
       <script src="js/popup.js"></script>
     </body>
   </html>
